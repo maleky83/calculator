@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="practic.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <form>
+            <div class="header">
+                <input class="textt" type="text" placeholder="0" id="displayResult">
+            </div>
+            <div class="bottom">
+                <div class="headb">
+                    <input type="button" value="c" class="red" onclick="reset()"></input>
+                    <h2>JavaSctipt Calculator</h2>
+                </div>
+                <ul class="list">
+                    <input type="button" value="7" name="b7" onclick="addtocalculater(b7.value)"></input>
+                    <input type="button" value="8" name="b8" onclick="addtocalculater(b8.value)"></input>
+                    <input type="button" value="9" name="b9" onclick="addtocalculater(b9.value)"></input>
+                    <input type="button" value="+" name="addb" onclick="addtocalculater(addb.value)"></input>
+                    <input type="button" value="|x|" name="abs" onclick="mathcalculater('abs')"></input>
+                    <input type="button" value="ce" name="ceil" onclick="mathcalculater('ceil')"></input>
+                </ul>
+                <ul class="list">
+                    <input type="button" value="4" name="b4" onclick="addtocalculater(b4.value)"></input>
+                    <input type="button" value="5" name="b5" onclick="addtocalculater(b5.value)"></input>
+                    <input type="button" value="6" name="b6" onclick="addtocalculater(b6.value)"></input>
+                    <input type="button" value="-" name="subb" onclick="addtocalculater(subb.value)"></input>
+                    <input type="button" value="&radic;" name="sqrt" onclick="mathcalculater('sqrt')"></input>
+                    <input type="button" value="fl" name="floor" onclick="mathcalculater('floor')"></input>
+                </ul>
+                <ul class="list">
+                    <input type="button" value="1" name="b1" onclick="addtocalculater(b1.value)"></input>
+                    <input type="button" value="2" name="b2" onclick="addtocalculater(b2.value)"></input>
+                    <input type="button" value="3" name="b3" onclick="addtocalculater(b3.value)"></input>
+                    <input type="button" value="*" name="mulb" onclick="addtocalculater(mulb.value)"></input>
+                    <input type="button" value="r" name="round" onclick="mathcalculater('round')"></input>
+                    <input type="button" value="^" name="pow" onclick="mathcalculater('pow')"></input>
+                </ul>
+                <ul class="list">
+                    <input type="button" value="0" name="b0" onclick="addtocalculater(b0.value)"></input>
+                    <input type="button" value="." name="potb" onclick="addtocalculater(potb.value)"></input>
+                    <input type="button" value="/" name="divb" onclick="addtocalculater(divb.value)"></input>
+                    <input type="button" value="=" class="green" onclick="finilize()"></input>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var powFlag = false;
+        function addtocalculater(value) {
+            document.getElementById('displayResult').value += value;
+            if (powFlag) {
+                var numbers = document.getElementById('displayResult').value.split('^');
+                document.getElementById('displayResult').value =
+                    Math.pow(numbers[0], numbers[1]);
+                powFlag = false;
+            };
+        }
+        function reset() {
+            document.getElementById('displayResult')
+        }
+        function finilize() {
+            document.getElementById('displayResult').value = eval(document.getElementById('displayResult').value);
+        }
+        function mathcalculater(mymath) {
+            if (mymath == 'pow') {
+                powFlag = true;
+                document.getElementById('displayResult').value += '^';
+            } else {
+                var val = document.getElementById('displayResult').value;
+                document.getElementById('displayResult').value = Math[mymath](val);
+            };
+        }
+    </script>
+</body>
+
+</html>
