@@ -1,29 +1,55 @@
-var powFlag = false;
-function addtocalculater(value) {
-  document.getElementById('displayResult').value += value;
-  if (powFlag) {
-    var numbers = document.getElementById('displayResult').value.split('^');
-    document.getElementById('displayResult').value = Math.pow(
-      numbers[0],
-      numbers[1]
-    );
-    powFlag = false;
-  }
-}
-function reset() {
-  document.getElementById('displayResult');
-}
-function finilize() {
-  document.getElementById('displayResult').value = eval(
-    document.getElementById('displayResult').value
-  );
-}
-function mathcalculater(mymath) {
-  if (mymath == 'pow') {
-    powFlag = true;
-    document.getElementById('displayResult').value += '^';
-  } else {
-    var val = document.getElementById('displayResult').value;
-    document.getElementById('displayResult').value = Math[mymath](val);
-  }
-}
+    let powFlag = false;
+
+    function insert(val) {
+      const input = document.getElementById("displayResult");
+      input.value += val;
+
+      if (powFlag) {
+        const parts = input.value.split("^");
+        if (parts.length === 2) {
+          input.value = Math.pow(parseFloat(parts[0]), parseFloat(parts[1]));
+          powFlag = false;
+        }
+      }
+    }
+
+    function clearDisplay() {
+      document.getElementById("displayResult").value = "";
+    }
+
+    function calculate() {
+      try {
+        const result = eval(document.getElementById("displayResult").value);
+        document.getElementById("displayResult").value = result;
+      } catch (e) {
+        alert("Invalid expression");
+      }
+    }
+
+    function mathFn(fn) {
+      const input = document.getElementById("displayResult");
+      let val = parseFloat(input.value);
+      if (isNaN(val)) return;
+
+      switch (fn) {
+        case "abs":
+          input.value = Math.abs(val);
+          break;
+        case "ceil":
+          input.value = Math.ceil(val);
+          break;
+        case "floor":
+          input.value = Math.floor(val);
+          break;
+        case "round":
+          input.value = Math.round(val);
+          break;
+        case "sqrt":
+          input.value = Math.sqrt(val);
+          break;
+        case "pow":
+          powFlag = true;
+          input.value += "^";
+          break;
+      }
+    }
